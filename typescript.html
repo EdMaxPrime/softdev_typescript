@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Typescript Presentation</title>
+	<style type="text/css">
+		.slide {
+			height: 800px;
+		}
+		#what {
+			margin-top: 15%;
+		}
+		.centered {
+			text-align: center;;
+		}
+		body {
+			padding: 40px;
+			font-size: 24px;
+		}
+		#title {
+			padding: 10px;
+			background-color: rgb(32, 64, 105);
+			color: white;
+			font-family: sans-serif;
+		}
+		p, ol {
+			line-height: 2em;
+			padding: 20px;
+		}
+		ol {
+			padding-left: 2in;
+			padding-right: 2in;
+		}
+		.logo {
+			margin-top: 20px;
+			text-align: center;
+		}
+		.logo:first-child {
+			margin-right: 200px;
+		}
+		pre, code {
+			padding: 0;
+			margin-left: 0;
+			margin-right: 0;
+			font-size: 18px;
+		}
+	</style>
+	<link rel="stylesheet" href="highlight/styles/solarized-light.css" />
+</head>
+<body>
+	<div class="slide">
+		<div id="title">
+			<h1 class="centered">Typescript</h1>
+			<h2 class="centered">M&amp;M</h2>
+			<h2 class="centered">Michela Marchini and Max Zlotskiy</h2>
+		</div>
+		<h2 id="what">What is it?</h2>
+		<p>TypeScript is a superset of JavaScript. This means that all JavaScript code is inherently TypeScript code. In addition, TypeScript compiles into JavaScript easily using the TypeScript compiler, as TypeScript cannot be run on browsers by itself. However, it still relatins all the additional typescript functionality</p>
+	</div>
+	<div class="slide">
+		<h2>History</h2>
+		<p>Typescript was released in 2012 by Microsoft. It was created in attempt to address JavaScript’s shortcomings with developing large-scale programs. Typescript developers wanted to maintain compatibility with JavaScript, while implementing class-based programming, that would make development easier. Typescript is commonly used to develop JavaScript applications for client-side use, but it is also used in Node.js for server-side execution.</p>
+		<center>
+			<img class="logo" src="http://pngimg.com/uploads/microsoft/microsoft_PNG6.png"></img>
+			<img class="logo" src="https://embedwistia-a.akamaihd.net/deliveries/997aa90405be497b51038e4826ff6da7b320b994.jpg"></img>
+		</center>
+	</div>
+	<div class="slide">
+		<h2>Why would I ever use this?</h2>
+		<p>So if javascript and typescript are so similar, why would you use typescript?
+			<center><img src="utility.jpg" width="40%" height="300"></img></center>
+			<ol>
+				<li>Typescript has features that are either not part of JavaScript or are part of newer versions of javascript not supported by most browsers</li>
+				<li>Typescript is a class-based language which makes large-scale development a lot more feasible</li>
+				<li>Typescript gives compile-time errors that make sense as opposed to javascript’s vague run-time errors</li>
+			</ol>
+		</p>
+	</div>
+	<div class="slide">
+		<h2>Features</h2>
+		<ol>
+			<li>Cool Syntax Stuff</li>
+			<li>Type Annotations ("Optional" Static Typing)</li>
+			<li>Type Inferencing (Duck Typing)</li>
+			<li>Classes (Hello java my old friend...)</li>
+			<li>Interfaces (...I've come to talk with you again)</li>
+		</ol>
+	</div>
+	<div class="slide">
+		<h2>Syntax</h2>
+		<h4>Var vs. Let</h4>
+		<p>In TypeScript the keyword <b>let</b> is used in preference to JavaScript's <b>var</b> because it confines variables to the scope/block they were defined in, and doesn't let you redefine the same variable.</p>
+		<h4>Rest, Optional and Default Parameters</h4>
+		<pre><code class="typescript">
+			//rest
+			let add = function(...a) {
+				let sum = 0;
+				for(let i = 0; i < a.length; i++) {
+					sum += a[i];
+				}
+				return sum;
+			}
+			
+			//optional
+			let greet = function(first, last?) {
+				console.log(first + " " + last);
+			}
+
+			//default
+			let dateFormat = function(day, month, year=2018) {
+				console.log(day + "/" + month + "/" + year);
+			}
+		</code></pre>
+	</div>
+	<div class="slide">
+		<h2>Type Annotations</h2>
+		<p>Stuff</p>
+		<pre><code class="typescript">
+			let amount : number = 5;
+			amount = 42;
+			amount = true; //error
+			let name : string = "DW";
+			name = {}; //error
+			let yesno : boolean = true;
+			yesno = false;
+			let random : any = "pizza";
+			random = 5; //ok
+			random = true; //ok
+
+			let repeat = function(str : string, times : number) : string {
+				result = "";
+				while(times > 0) {
+					result += str;
+				}
+				return result;
+			}
+		</code></pre>
+	</div>
+	<div class="slide">
+		<h2></h2>
+	</div>
+	<div class="slide">
+		<h2></h2>
+	</div>
+	<div class="slide">
+		<h2></h2>
+	</div>
+	<script type="text/javascript" src="highlight/highlight.pack.js"></script>
+	<script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
