@@ -144,6 +144,7 @@
       <p>If it walks like a duck, looks like a duck, and sounds like a duck, then it's a duck.</p>
 	  <pre><code class="typescript">
             let myVar = 5; //assumed to be a number
+	    myVar = true; //error 
 
             //TypeScript infers that isOnScreen returns boolean
             let isOnScreen = function(point: {x: number; y: number}) {
@@ -167,9 +168,6 @@
 	<div class="slide">
 		<h2>Interfaces</h2>
 		<pre><code class="typescript">
-	        let amount = 5;
-	        amount = false; //error
-
 	        interface Book {
 	            title : string;
 	            author : string;
