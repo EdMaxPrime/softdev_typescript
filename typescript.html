@@ -99,16 +99,22 @@
 				}
 				return sum;
 			}
+			console.log(add(1));
+			console.log(add(1, 2, 3));			   
 			
 			//optional
 			let greet = function(first, last?) {
 				console.log(first + " " + last);
 			}
-
+			console.log(greet("Bond"));
+			console.log(greet("James", "Bond"));			   
+						   
 			//default
 			let dateFormat = function(day, month, year=2018) {
 				console.log(day + "/" + month + "/" + year);
 			}
+			console.log(dateFormat(3, 16));
+			console.log(dateFormat(3, 16, 2017));			
 		</code></pre>
 	</div>
 	<div class="slide">
@@ -131,7 +137,10 @@
 					result += str;
 				}
 				return result;
-			}
+		      }
+
+		      console.log(repeat("hi", 3));
+		      console.log(repeat(5, 8));
 		</code></pre>
 	</div>
 	<div class="slide">
@@ -148,7 +157,7 @@
 	          return "Title: " + book.title + ", Author: " + book.author;
 	      }
 	      let harryPotter = {title : "Harry Potter", author : "JK Rowling"};
-	      book_info(harryPotter);
+	      console.log(book_info(harryPotter));
 	      
 	  </code></pre>
 	</div>
