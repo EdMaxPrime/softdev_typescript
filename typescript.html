@@ -88,31 +88,27 @@
 	<div class="slide">
 		<h2>Syntax</h2>
 		<h4>Var vs. Let</h4>
-		<p>In TypeScript the keyword <b>let</b> is used in preference to JavaScript's <b>var</b> because it confines variables to the scope/block they were defined in, and doesn't let you redefine the same variable.</p>
+		<p style="padding-top: 5px; padding-bottom: 5px;">In TypeScript the keyword <b>let</b> is used in preference to JavaScript's <b>var</b> because it confines variables to the scope/block they were defined in, and doesn't let you redefine the same variable.</p>
 		<h4>Rest, Optional and Default Parameters</h4>
 		<pre><code class="typescript">
 			//rest
 			let add = function(...a) {
 				let sum = 0;
-				for(let i = 0; i < a.length; i++) {
-					sum += a[i];
-				}
+				for(let i = 0; i < a.length; i++) { sum += a[i]; }
 				return sum;
-			}
+			};
 			console.log(add(1));
 			console.log(add(1, 2, 3));			   
-			
 			//optional
 			let greet = function(first, last?) {
 				console.log(first + " " + last);
-			}
+			};
 			console.log(greet("Bond"));
-			console.log(greet("James", "Bond"));			   
-						   
+			console.log(greet("James", "Bond"));			   		   
 			//default
 			let dateFormat = function(day, month, year=2018) {
 				console.log(day + "/" + month + "/" + year);
-			}
+			};
 			console.log(dateFormat(3, 16));
 			console.log(dateFormat(3, 16, 2017));			
 		</code></pre>
@@ -120,55 +116,112 @@
 	<div class="slide">
 		<h2>Type Annotations</h2>
 		<pre><code class="typescript">
-			let amount : number = 5;
-			amount = 42;
-			amount = true; //error
-			let name : string = "DW";
-			name = {}; //error
-			let yesno : boolean = true;
-			yesno = false;
-			let random : any = "pizza";
-			random = 5; //ok
-			random = true; //ok
+            let amount : number = 5;
+            amount = 42;
+            amount = true; //error
+            let name : string = "DW";
+            name = {}; //error
+            let yesno : boolean = true;
+            yesno = false;
+            let random : any = "pizza";
+            random = 5; //ok
+            random = true; //ok
 
-			let repeat = function(str : string, times : number) : string {
-				result = "";
-				while(times > 0) {
-					result += str;
-				}
-				return result;
-		      }
+            let repeat = function(str : string, times : number) : string {
+                result = "";
+                while(times > 0) {
+                    result += str;
+                }
+                return result;
+            };
 
-		      console.log(repeat("hi", 3));
-		      console.log(repeat(5, 8));
+            console.log(repeat("hi", 3));
+            console.log(repeat(5, 8));
 		</code></pre>
 	</div>
 	<div class="slide">
 	  <h2>Type Inferencing</h2>
-	  <pre><code>
-	      let amount = 5;
-	      amount = false; //error
+      <p>If it walks like a duck, looks like a duck, and sounds like a duck, then it's a duck.</p>
+	  <pre><code class="typescript">
+            let myVar = 5; //assumed to be a number
 
-	      interface Book {
-	          title : string;
-	          author : string;
-	      }
-	      let book_info = function(book : Book) : string {
-	          return "Title: " + book.title + ", Author: " + book.author;
-	      }
-	      let harryPotter = {title : "Harry Potter", author : "JK Rowling"};
-	      console.log(book_info(harryPotter));
-	      
+            //TypeScript infers that isOnScreen returns boolean
+            let isOnScreen = function(point: {x: number; y: number}) {
+                return (point.x > 0 && point.y > 0 && point.x < 500 && point.y < 500);
+            };
+
+            var circle = {x: 5, y: 50, radius: 10, fill: "green"};
+            var square = {x: 50, y: 5, side: 10, fill: "blue"};
+            var mouseEvent = {x: 50, y: 5};
+            
+            console.log(isOnScreen(circle));
+            console.log(isOnScreen(square));
+            console.log(isOnScreen(mouseEvent));
+
+            //Do you think this needs to be fixed?
+            let listener = function(event) {
+                console.log(event.button);
+            };
 	  </code></pre>
 	</div>
 	<div class="slide">
 		<h2>Interfaces</h2>
+		<pre><code class="typescript">
+	        let amount = 5;
+	        amount = false; //error
+
+	        interface Book {
+	            title : string;
+	            author : string;
+	        }
+	        let book_info = function(book : Book) : string {
+	            return "Title: " + book.title + ", Author: " + book.author;
+	        }
+	        let harryPotter = {title : "Harry Potter", author : "JK Rowling"};
+	        console.log(book_info(harryPotter));
+		</code></pre>
 	</div>
 	<div class="slide">
 		<h2>Classes</h2>
+        <pre><code class="ts">
+            class Animal {
+                taxonomy : string;
+                constructor(public family: string, public genus: string, public species: string) {
+                    this.taxonomy = family + " " + genus + " " + species;
+                }
+            }
+
+            let bob : Animal = new Animal("Hominidae", "Homo", "Sapien");
+
+            //Inheritance!!!
+            class Dog extends Animal {
+                name : string;
+                constructor(public name: string) {
+                    super("Canidae", "Canis", "Lupus");
+                }
+                bark() {
+                    console.log(this.name + " just barked you!");
+                }
+            }
+
+            let greatDane = new Dog("Scooby Doo");
+            greatDane.bark();
+        </code></pre>
+	</div>
+	<div class="slide">
+		<h2>Summary</h2>
+		<p>TypeScript is cool. You can play with it here <a href="https://www.typescriptlang.org/play/index.html">https://www.typescriptlang.org/play/index.html</a>. If you ever find yourself writing large-scale JavaScript applications, it's a super useful tool to have because it can save you a lot of time deciphering vague "Type Error"s. It also allows you to use features in javascript that most browsers don't support.</p>
+		<p>Written/performed by Max Zlotskiy and Michela Marchini, aka M&amp;M</p>
 	</div>
 	<script type="text/javascript" src="highlight/highlight.pack.js"></script>
-	<script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+	<script type="text/javascript">
+	    hljs.initHighlightingOnLoad();
+        document.getElementsByTagName("body")[0].addEventListener("keyup", function(evt) {
+            if(evt.key == "ArrowLeft") window.scrollBy(0, -830);
+            if(evt.key == "ArrowRight") window.scrollBy(0, 830);
+            evt.preventDefault();
+        });
+	</script>
 </body>
 </html>
 
