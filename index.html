@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TypeScript Presentation</title>
+	<style type="text/css">
+		.slide {
+			height: 800px;
+		}
+		#what {
+			margin-top: 15%;
+		}
+		.centered {
+			text-align: center;;
+		}
+		body {
+			padding: 40px;
+			font-size: 24px;
+		}
+		#title {
+			padding: 10px;
+			background-color: rgb(32, 64, 105);
+			color: white;
+			font-family: sans-serif;
+		}
+		p, ol {
+			line-height: 2em;
+			padding: 20px;
+		}
+		ol {
+			padding-left: 2in;
+			padding-right: 2in;
+		}
+		.logo {
+			margin-top: 20px;
+			text-align: center;
+		}
+		.logo:first-child {
+			margin-right: 200px;
+		}
+		pre, code {
+			padding: 0;
+			margin-left: 0;
+			margin-right: 0;
+			font-size: 18px;
+		}
+	</style>
+	<link rel="stylesheet" href="highlight/styles/solarized-light.css" />
+</head>
+<body>
+	<div class="slide">
+		<div id="title">
+			<h1 class="centered">TypeScript</h1>
+			<h2 class="centered">M&amp;M</h2>
+			<h2 class="centered">Michela Marchini and Max Zlotskiy</h2>
+		</div>
+		<h2 id="what">What is it?</h2>
+		<p>TypeScript is a superset of JavaScript. This means that all JavaScript code is inherently TypeScript code. In addition, TypeScript compiles into JavaScript easily using the TypeScript compiler, as TypeScript cannot be run on browsers by itself. However, it still relatins all the additional TypeScript functionality</p>
+	</div>
+	<div class="slide">
+		<h2>History</h2>
+		<p>TypeScript was released in 2012 by Microsoft. It was created in attempt to address JavaScript’s shortcomings with developing large-scale programs. TypeScript developers wanted to maintain compatibility with JavaScript, while implementing class-based programming, that would make development easier. TypeScript is commonly used to develop JavaScript applications for client-side use, but it is also used in Node.js for server-side execution.</p>
+		<center>
+			<img class="logo" src="http://pngimg.com/uploads/microsoft/microsoft_PNG6.png"></img>
+			<img class="logo" src="https://embedwistia-a.akamaihd.net/deliveries/997aa90405be497b51038e4826ff6da7b320b994.jpg"></img>
+		</center>
+	</div>
+	<div class="slide">
+		<h2>Why would I ever use this?</h2>
+		<p>So if JavaScript and TypeScript are so similar, why would you use TypeScript?
+			<center><img src="utility.jpg" width="40%" height="300"></img></center>
+			<ol>
+				<li>TypeScript has features that are either not part of JavaScript or are part of newer versions of JavaScript not supported by most browsers</li>
+				<li>TypeScript is a class-based language which makes large-scale development a lot more feasible</li>
+				<li>TypeScript gives compile-time errors that make sense as opposed to JavaScript’s vague run-time errors</li>
+			</ol>
+		</p>
+	</div>
+	<div>
+		<h2>Features</h2>
+		<h3>Syntax</h3>
+		<h4>Var vs. Let</h4>
+		<p style="padding-top: 5px; padding-bottom: 5px;">In TypeScript the keyword <b>let</b> is used in preference to JavaScript's <b>var</b> because it confines variables to the scope/block they were defined in, and doesn't let you redefine the same variable.</p>
+		<h4>Rest, Optional and Default Parameters</h4>
+		<pre><code class="typescript">
+			//rest
+			let add = function(...a) {
+				let sum = 0;
+				for(let i = 0; i < a.length; i++) { sum += a[i]; }
+				return sum;
+			};
+			console.log(add(1));
+			console.log(add(1, 2, 3));			   
+			//optional
+			let greet = function(first, last?) {
+				console.log(first + " " + last);
+			};
+			console.log(greet("Bond"));
+			console.log(greet("James", "Bond"));			   		   
+			//default
+			let dateFormat = function(day, month, year=2018) {
+				console.log(day + "/" + month + "/" + year);
+			};
+			console.log(dateFormat(3, 16));
+			console.log(dateFormat(3, 16, 2017));			
+		</code></pre>
+	</div>
+	<div class="slide">
+		<h3>Type Annotations</h3>
+		<pre><code class="typescript">
+            let amount : number = 5;
+            amount = 42;
+            amount = true; //error
+            let name : string = "DW";
+            name = {}; //error
+            let yesno : boolean = true;
+            yesno = false;
+            let random : any = "pizza";
+            random = 5; //ok
+            random = true; //ok
+
+            let repeat = function(str : string, times : number) : string {
+                result = "";
+                while(times > 0) {
+                    result += str;
+                }
+                return result;
+            };
+
+            console.log(repeat("hi", 3));
+            console.log(repeat(5, 8));
+		</code></pre>
+	</div>
+	<div class="slide">
+	  <h3>Type Inferencing</h3>
+      <p>If it walks like a duck, looks like a duck, and sounds like a duck, then it's a duck.</p>
+	  <pre><code class="typescript">
+            let myVar = 5; //assumed to be a number
+	    myVar = true; //error 
+
+            //TypeScript infers that isOnScreen returns boolean
+            let isOnScreen = function(point: {x: number; y: number}) {
+                return (point.x > 0 && point.y > 0 && point.x < 500 && point.y < 500);
+            };
+
+            var circle = {x: 5, y: 50, radius: 10, fill: "green"};
+            var square = {x: 50, y: 5, side: 10, fill: "blue"};
+            var mouseEvent = {x: 50, y: 5};
+            
+            console.log(isOnScreen(circle));
+            console.log(isOnScreen(square));
+            console.log(isOnScreen(mouseEvent));
+
+            //Do you think this needs to be fixed?
+            let listener = function(event) {
+                console.log(event.button);
+            };
+	  </code></pre>
+	</div>
+	<div class="slide">
+		<h3>Interfaces</h3>
+		<pre><code class="typescript">
+	        interface Book {
+	            title : string;
+	            author : string;
+	        }
+	        let book_info = function(book : Book) : string {
+	            return "Title: " + book.title + ", Author: " + book.author;
+	        }
+	        let harryPotter = {title : "Harry Potter", author : "JK Rowling"};
+	        console.log(book_info(harryPotter));
+		</code></pre>
+	</div>
+	<div class="slide">
+		<h3>Classes</h3>
+        <pre><code class="ts">
+            class Animal {
+                taxonomy : string;
+                constructor(public family: string, public genus: string, public species: string) {
+                    this.taxonomy = family + " " + genus + " " + species;
+                }
+            }
+
+            let bob : Animal = new Animal("Hominidae", "Homo", "Sapien");
+
+            //Inheritance!!!
+            class Dog extends Animal {
+                name : string;
+                constructor(public name: string) {
+                    super("Canidae", "Canis", "Lupus");
+                }
+                bark() {
+                    console.log(this.name + " just barked you!");
+                }
+            }
+
+            let greatDane = new Dog("Scooby Doo");
+            greatDane.bark();
+        </code></pre>
+	</div>
+	<div class="slide">
+		<h2>Summary</h2>
+		<p>TypeScript is cool. You can play with it here <a href="https://www.typescriptlang.org/play/index.html">https://www.typescriptlang.org/play/index.html</a>. If you ever find yourself writing large-scale JavaScript applications, it's a super useful tool to have because it can save you a lot of time deciphering vague "Type Error"s. It also allows you to use features in javascript that most browsers don't support.</p>
+		<p>Written/performed by Max Zlotskiy and Michela Marchini, aka M&amp;M</p>
+	</div>
+	<script type="text/javascript" src="highlight/highlight.pack.js"></script>
+	<script type="text/javascript">
+	    hljs.initHighlightingOnLoad();
+        document.getElementsByTagName("body")[0].addEventListener("keyup", function(evt) {
+            if(evt.key == "ArrowLeft") window.scrollBy(0, -830);
+            if(evt.key == "ArrowRight") window.scrollBy(0, 830);
+            evt.preventDefault();
+        });
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
