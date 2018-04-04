@@ -3,7 +3,7 @@
 <head>
 	<title>TypeScript Presentation</title>
 	<style type="text/css">
-		.slide {}
+		.slide {border-bottom: 2px solid #888;}
 		.centered {text-align: center;}
 		body {
 			padding: 40px;
@@ -35,6 +35,21 @@
 			margin-right: 0;
 			font-size: 18px;
 		}
+        table.compare {
+            table-layout: fixed;
+            width: 100%;
+        }
+        #scrolltop {
+            display: inline-block;
+            position: fixed;
+            padding: 10px;
+            bottom: 10px;
+            right: 10px;
+            text-transform: uppercase;
+            text-decoration: none;
+            background-color: rgb(64, 128, 210);
+            color: white;
+        }
 	</style>
 	<link rel="stylesheet" href="highlight/styles/solarized-light.css" />
 </head>
@@ -53,22 +68,74 @@
 		<p style="padding-top: 5px; padding-bottom: 5px;">In TypeScript the keyword <b>let</b> is used in preference to JavaScript's <b>var</b> because it confines variables to the scope/block they were defined in, and doesn't let you redefine the same variable.</p>
 	</div>
     <div id="ex1" class="slide">
-        <h2>Rest, Optional and Default Parameters</h2>
+        <h2>Rest Parameters</h2>
+        <p>EXPLAIN</p>
+        <table class="compare">
+            <tr><th>TypeScript</th><th>JavaScript</th></tr>
+            <tr>
+                <td><pre><code class="typescript">
+//rest
+let add = function(...a) {
+    let sum = 0;
+    for(let i = 0; i < a.length; i++) {
+        sum += a[i];
+    }
+    return sum;
+};
+console.log(add(1)); //should be 1
+console.log(add(1, 2, 3)); //should be 6
+
+
+
+
+        </code></pre></td>
+                <td><pre><code class="javascript">
+//rest
+var add = function () {
+    var a = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        a[_i] = arguments[_i];
+    }
+    var sum = 0;
+    for (var i = 0; i < a.length; i++) {
+        sum += a[i];
+    }
+    return sum;
+};
+console.log(add(1)); //should be 1
+console.log(add(1, 2, 3)); //should be 6
+                </code></pre></td>
+            </tr>
+        </table>
+    </div>
+    <div id="ex2" class="slide">
+        <h2>Optional Parameters</h2>
+        <p>EXPLAIN</p>
+        <table class="compare">
+            <tr><th>TypeScript</th><th>JavaScript</th></tr>
+            <tr>
+                <td><pre><code class="typescript">
+//the last parameter is optional
+let greet = function(first, last?) {
+    console.log(first + " " + last);
+};
+console.log(greet("Bond")); //Bond
+console.log(greet("James", "Bond")); //James Bond
+        </code></pre></td>
+                <td><pre><code class="javascript">
+//the last parameter is optional
+var greet = function(first, last?) {
+    console.log(first + " " + last);
+};
+console.log(greet("Bond")); //Bond
+console.log(greet("James", "Bond")); //James Bond
+                </code></pre></td>
+            </tr>
+        </table>
+    </div>
+    <div id="ex3" class="slide">
+        <h2>Default Parameters</h2>
 		<pre><code class="typescript">
-			//rest
-			let add = function(...a) {
-				let sum = 0;
-				for(let i = 0; i < a.length; i++) { sum += a[i]; }
-				return sum;
-			};
-			console.log(add(1));
-			console.log(add(1, 2, 3));			   
-			//optional
-			let greet = function(first, last?) {
-				console.log(first + " " + last);
-			};
-			console.log(greet("Bond"));
-			console.log(greet("James", "Bond"));			   		   
 			//default
 			let dateFormat = function(day, month, year=2018) {
 				console.log(day + "/" + month + "/" + year);
@@ -78,7 +145,8 @@
 		</code></pre>
 	</div>
 	<div class="slide">
-		<h3>Type Annotations</h3>
+		<h2>Type Annotations</h2>
+        <p>EXPLAIN</p>
 		<pre><code class="typescript">
             let amount : number = 5;
             amount = 42;
@@ -170,6 +238,7 @@
             greatDane.bark();
         </code></pre>
 	</div>
+    <a id="scrolltop" href="#top">top</a>
 	<script type="text/javascript" src="highlight/highlight.pack.js"></script>
 	<script type="text/javascript">
 	    hljs.initHighlightingOnLoad();
