@@ -3,12 +3,11 @@
 <head>
 	<title>TypeScript Presentation</title>
 	<style type="text/css">
-		.slide {
-			height: 800px;
-		}
-		#what {
-			margin-top: 15%;
-		}
+        .slide {margin-top: 0px; margin-bottom: 0px;}
+        .slide:nth-child(1) {background-color: #C9F1FF;}
+        .slide:nth-child(2) {background-color: #BBFFD0;}
+        .slide:nth-child(4) {background-color: #FFD3DF;}
+		.slide:nth-child(5) {background-color: #FFDFCE;}
 		.centered {
 			text-align: center;;
 		}
@@ -43,6 +42,19 @@
 			margin-right: 0;
 			font-size: 18px;
 		}
+        a.button {
+            display: inline-block;
+            padding: 9px;
+            margin: 10px 50px; /*10 vertically and 50 horizontally*/
+            background-color: #B0D3E1; /*#FFB3B8;*/
+            text-transform: uppercase;
+            text-decoration: none;
+            font-family: sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            color: black;
+        }
+        a.button:hover {color: white;}
 	</style>
 	<link rel="stylesheet" href="highlight/styles/solarized-light.css" />
 </head>
@@ -53,6 +65,10 @@
 			<h2 class="centered">M&amp;M</h2>
 			<h2 class="centered">Michela Marchini and Max Zlotskiy</h2>
 		</div>
+        <p>Welcome to our website! Here, you can view the presentation we gave on Friday, March 16, 2018. Our topic was, as the heading suggests, TypeScript. Follow the links below to learn more...</p>
+        <div class="centered"><a class="button" href="#what">Read About It</a><a class="button" href="example.html">See Examples</a></div>
+    </div>
+    <div class="slide">
 		<h2 id="what">What is it?</h2>
 		<p>It's a programming language. Specifically, TypeScript is a superset of JavaScript. This means that all JavaScript code is inherently TypeScript code &mdash; but TypeScript has some added functionality too. It's used in browsers to make web pages dynamic, but not directly; you have to compile it into JS first. Worry not, though, because TypeScript compiles into JS easily using the compiler. And it still retains all the additional TypeScript functionality (hence the category "superset").</p>
 	</div>
