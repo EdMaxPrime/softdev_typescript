@@ -50,6 +50,18 @@
             background-color: #ddd;
             color: rgb(32, 64, 105);
         }
+        a.button {
+            display: inline-block;
+            padding: 9px;
+            margin: 10px 50px; /*10 vertically and 50 horizontally*/
+            background-color: #B0D3E1; /*#FFB3B8;*/
+            text-transform: uppercase;
+            text-decoration: none;
+            font-family: sans-serif;
+            font-weight: 600;
+            color: black;
+        }
+        a.button:hover {color: white;}
 	</style>
 	<link rel="stylesheet" href="highlight/styles/solarized-light.css" />
 </head>
@@ -63,7 +75,11 @@
             <tr><td><a href="#ex3">Default Parameters</a></td>  <td><a href="#ex13">Classes</a></td></tr>
         </table>
     </div>
-	<div id="ex0" class="slide">
+    <div style="background-color: #C9F1FF; padding: 20px; line-height: 1.5em;">
+        Each of the examples has a code sample below it. Please note that, depending on your internet browser window size, some of those side-by-side code comparisons may turn into side-scrolling adventures. If that's the case, kepp in mind the code isn't cut off, you just need to swipe left to see it.<br>
+	    <div class="centered"><a class="button" href="index.html">read about it</a><a class="button" href="http://typescriptlang.org">documentation</a></div>
+    </div>
+    <div id="ex0" class="slide">
 		<h2>Var vs. Let</h2>
 		<p style="padding-top: 5px; padding-bottom: 5px;">In TypeScript the keyword <b>let</b> is used in preference to JavaScript's <b>var</b> because it confines variables to the scope/block they were defined in, and doesn't let you redefine the same variable.</p>
 	</div>
@@ -110,7 +126,7 @@ console.log(add(1, 2, 3)); //should be 6
     </div>
     <div id="ex2" class="slide">
         <h2>Optional Parameters</h2>
-        <p>Optional parameters are pretty self explanatory. In TypeScript you can make a parameter optional by putting a '?' after the variable name. This functionality mimics JavaScript in which all parameters are optional. In TypeScript, optional parameters must follow required parameters (be the last ones defined).</p>
+        <p>Optional parameters are pretty self explanatory. In TypeScript you can make a parameter to a function optional by putting a '?' after the variable name. This functionality mimics JavaScript in which all parameters are optional. In TypeScript, optional parameters must follow required parameters (be the last ones defined).</p>
         <table class="compare">
             <tr><th>TypeScript</th><th>JavaScript</th></tr>
             <tr>
@@ -134,111 +150,245 @@ console.log(greet("James", "Bond")); //James Bond
         </table>
     </div>
     <div id="ex3" class="slide">
-      <h2>Default Parameters</h2>
-      <p>TypeScript allows you to set a default value for a parameter that will be used if the user does not provide one or if the user passes 'undefined'. Default parameters are denoted by including '= VALUE' after a parameter name. If default parameters are defined after all required parameters they will be treated as optional and the default value can be triggered by calling the function without the parameter. If the default parameter is between required parameters, however, the default value will only be triggered if the user passes 'undefined' as the parameter value.</p>
-		<pre><code class="typescript">
-			//default
-			let dateFormat = function(day, month, year=2018) {
-				console.log(day + "/" + month + "/" + year);
-			};
-			console.log(dateFormat(3, 16));
-			console.log(dateFormat(3, 16, 2017));			
-		</code></pre>
+        <h2>Default Parameters</h2>
+        <p>TypeScript allows you to set a default value for a parameter that will be used if the user does not provide one or if the user passes 'undefined'. Default parameters are denoted by including '= VALUE' after a parameter name. If default parameters are defined after all required parameters they will be treated as optional and the default value can be triggered by calling the function without the parameter. If the default parameter is between required parameters, however, the default value will only be triggered if the user passes 'undefined' as the parameter value.</p>
+    	<table class="compare">
+            <tr><th>TypeScript</th><th>JavaScript</th></tr>
+            <tr>
+                <td><pre><code class="typescript">
+//the year parameter's default value is 2018
+let dateFormat = function(day, month, year=2018) {
+    console.log(day + "/" + month + "/" + year);
+};
+console.log(dateFormat(3, 16));
+console.log(dateFormat(3, 16, 2017));           
+
+                </code></pre></td>
+                <td><pre><code class="javscript">
+//the year parameter's default value is 2018
+var dateFormat = function(day, month, year) {
+    if(year == void 0) { year = 2018; }
+    console.log(day + "/" + month + "/" + year);
+};
+console.log(dateFormat(3, 16));
+console.log(dateFormat(3, 16, 2017));  
+                </code></pre></td>
+            </tr>
+        </table>
 	</div>
-	<div class="slide">
+	<div id="ex10" class="slide">
 		<h2>Type Annotations</h2>
-        <p>As one might assume from the name 'TypeScript', Typescript is a statically typed language. This is a way in which the language presents itself a lot more like Java than JavaScript. The four basic data types in TypeScript are: number, boolean, string, and any. The any type allows you to bypass static typing, as an any type variable becomes functionally dynamically typed. The colon is used to denote type in TypeScript. The following examples show how type annotations work in more detail.</p>
-		<pre><code class="typescript">
-            let amount : number = 5; //defines variable amount as a number
-            amount = 42;
-            amount = true; //error because true is not a number
-            let name : string = "DW"; //defines variable name as a string
-            name = {}; //error because a list is not a string
-            let yesno : boolean = true; //defines variable yesno as a boolean
-            yesno = false;
-            let random : any = "pizza"; //defines variable random as any
-            random = 5; //ok
-            random = true; //ok
+        <p>As one might assume from the name 'TypeScript', Typescript is a statically typed language. This is a way in which the language presents itself a lot more like Java than JavaScript. The four basic data types in TypeScript are: number, boolean, string, and any. The any type allows you to bypass static typing, as an any type variable becomes functionally dynamically typed. The colon is used to denote type in TypeScript. The following examples show how type annotations work in more detail. Note that the errors mentioned in the code sample are compile-time errors.</p>
+		<table class="compare">
+            <tr><th>TypeScript</th><th>JavaScript</th></tr>
+            <tr>
+                <td><pre><code class="typescript">
+let amount : number = 5; //defines variable amount as a number
+amount = 42;
+amount = true; //error because true is not a number
+let name : string = "DW"; //defines variable name as a string
+name = []; //error because a list is not a string
+let yesno : boolean = true; //defines variable yesno as a boolean
+yesno = false;
+let random : any = "pizza"; //defines variable random as any
+random = 5; //ok
+random = true; //ok
 
-	    //parameters can also be typed
-	    let repeat = function(str : string, times : number) : string {
-                result = "";
-                while(times > 0) {
-                    result += str;
-                }
-                return result;
-            };
+//parameters can also be typed
+let repeat = function(str : string, times : number) : string {
+    result = "";
+    while(times > 0) {
+        result += str;
+    }
+    return result;
+};
 
-            console.log(repeat("hi", 3));
-            console.log(repeat(5, 8));
-		</code></pre>
+console.log(repeat("hi", 3));
+console.log(repeat(5, 8)); //error, expected the first argument to be a string
+                </code></pre></td>
+                <td><pre><code class="javascript">
+var amount = 5;
+amount = 42;
+amount = true;
+var name = "DW";
+name = {}; 
+var yesno = true;
+yesno = false;
+var random = "pizza";
+random = 5; 
+random = true;
+
+
+var repeat = function (str, times) {
+    result = "";
+    while (times > 0) {
+        result += str;
+    }
+    return result;
+};
+
+console.log(repeat("hi", 3));
+console.log(repeat(5, 8));
+                </code></pre></td>
+            </tr>
+        </table>
 	</div>
-	<div class="slide">
-	  <h3>Type Inferencing</h3>
-      <p>If it walks like a duck, looks like a duck, and sounds like a duck, then it's a duck.</p>
-	  <pre><code class="typescript">
-            let myVar = 5; //assumed to be a number
-	    myVar = true; //error 
+	<div id="ex11" class="slide">
+	    <h3>Type Inferencing</h3>
+        <p>If it walks like a duck, looks like a duck, and sounds like a duck, then it's a duck. This quote explains "duck typing," which in TS is called Type Inferencing. This means that not all variables have to have their type explicitly declared. The compiler can figure out from context what the type of a variable should be.</p>
+	    <table class="compare">
+            <tr><th>TypeScript</th><th>JavaScript</th></tr>
+            <tr>
+                <td><pre><code class="typescript">
+let myVar = 5; //assumed to be a number
+myVar = true; //error, expected a number not boolean
 
-            //TypeScript infers that isOnScreen returns boolean
-            let isOnScreen = function(point: {x: number; y: number}) {
-                return (point.x > 0 && point.y > 0 && point.x < 500 && point.y < 500);
-            };
+//TypeScript infers that isOnScreen returns boolean
+let isOnScreen = function(point: {x: number; y: number}) {
+    return (point.x > 0 && point.y > 0 && point.x < 500 && point.y < 500);
+};
 
-            var circle = {x: 5, y: 50, radius: 10, fill: "green"};
-            var square = {x: 50, y: 5, side: 10, fill: "blue"};
-            var mouseEvent = {x: 50, y: 5};
-            
-            console.log(isOnScreen(circle));
-            console.log(isOnScreen(square));
-            console.log(isOnScreen(mouseEvent));
+let circle = {x: 5, y: 50, radius: 10, fill: "green"};
+let square = {x: 50, y: 5, side: 10, fill: "blue"};
+let mouseEvent = {x: 50, y: 5};
 
-            //Do you think this needs to be fixed?
-            let listener = function(event) {
-                console.log(event.button);
-            };
-	  </code></pre>
+console.log(isOnScreen(circle));
+console.log(isOnScreen(square));
+console.log(isOnScreen(mouseEvent));
+
+//Do you think this needs to be fixed?
+let listener = function(event) {
+    console.log(event.button);
+};
+                </code></pre></td>
+                <td><pre><code class="javascript">
+var myVar = 5; 
+myVar = true; //this is ok in JS
+
+//Returns true if the point is within the bounds, assumes it has X and Y
+var isOnScreen = function(point) {
+    return (point.x > 0 && point.y > 0 && point.x < 500 && point.y < 500);
+};
+
+var circle = {x: 5, y: 50, radius: 10, fill: "green"};
+var square = {x: 50, y: 5, side: 10, fill: "blue"};
+var mouseEvent = {x: 50, y: 5};
+
+console.log(isOnScreen(circle));
+console.log(isOnScreen(square));
+console.log(isOnScreen(mouseEvent));
+
+//Do you think this needs to be fixed?
+var listener = function(event) {
+    console.log(event.button);
+};
+                </code></pre></td>
+            </tr>
+        </table>
+        <p>Yes, the listener function needs to be fixed. The type of "event" is assumed to be Object, however, this is not the same thing as "any." It's actually more like Java's Object type, which only has a toString() and equals() but nothing else. Trying to access the button property of the event variable would therefor give a compile-time error. To fix it, you need to explicitly state that the event parameter is of type any, or is an object with the button property.</p>
 	</div>
-	<div class="slide">
+	<div id="ex12" class="slide">
 		<h3>Interfaces</h3>
-		<pre><code class="typescript">
-	        interface Book {
-	            title : string;
-	            author : string;
-	        }
-	        let book_info = function(book : Book) : string {
-	            return "Title: " + book.title + ", Author: " + book.author;
-	        }
-	        let harryPotter = {title : "Harry Potter", author : "JK Rowling"};
-	        console.log(book_info(harryPotter));
-		</code></pre>
+        <p>Hello Java my old friend... I've come to implement with you again. Yes, there are interfaces in this language too! While interfaces are really useful for class-based programming, they can also be used to make type inferencing a lot more powerful. Say you need more than just a number or a string, perhaps a book. If you need to quickly define a more complex data structure, an interface is the best way to do it. And because interfaces can't be instantiated (unlike classes), TS has no choice but to infer that an object "implements" an interface, such as the harryPotter variable below.</p>
+		<table class="compare">
+            <tr><th>TypeScript</th><th>JavaScript</th></tr>
+            <tr>
+                <td><pre><code class="typescript">
+interface Book {
+    title : string;
+    author : string;
+}
+let book_info = function(book : Book) : string {
+    return "Title: " + book.title + ", Author: " + book.author;
+}
+let harryPotter = {title : "Harry Potter", author : "JK Rowling"};
+console.log(book_info(harryPotter));
+                </code></pre></td>
+                <td><pre><code class="javascript">
+var book_info = function(book) : string {
+    return "Title: " + book.title + ", Author: " + book.author;
+}
+var harryPotter = {title : "Harry Potter", author : "JK Rowling"};
+console.log(book_info(harryPotter));
+
+
+
+
+                </code></pre></td>
+            </tr>
+        </table>
+        
 	</div>
-	<div class="slide">
+	<div id="ex13" class="slide">
 		<h3>Classes</h3>
-        <pre><code class="ts">
-            class Animal {
-                taxonomy : string;
-                constructor(public family: string, public genus: string, public species: string) {
-                    this.taxonomy = family + " " + genus + " " + species;
-                }
-            }
+        <p>EXPLAIN</p>
+        <table class="compare">
+            <tr><th>TypeScript</th><th>JavaScript</th></tr>
+            <tr>
+                <td><pre><code class="ts">
+class Animal {
+    taxonomy : string;
+    constructor(public family: string, public genus: string, public species: string) {
+        this.taxonomy = family + " " + genus + " " + species;
+    }
+}
 
-            let bob : Animal = new Animal("Hominidae", "Homo", "Sapien");
+let bob : Animal = new Animal("Hominidae", "Homo", "Sapien");
 
-            //Inheritance!!!
-            class Dog extends Animal {
-                name : string;
-                constructor(public name: string) {
-                    super("Canidae", "Canis", "Lupus");
-                }
-                bark() {
-                    console.log(this.name + " just barked you!");
-                }
-            }
+//Inheritance!!!
+class Dog extends Animal {
+    name : string;
+    constructor(public name: string) {
+        super("Canidae", "Canis", "Lupus");
+    }
+    bark() {
+        console.log(this.name + " just barked you!");
+    }
+}
 
-            let greatDane = new Dog("Scooby Doo");
-            greatDane.bark();
-        </code></pre>
+let greatDane = new Dog("Scooby Doo");
+greatDane.bark();
+                </code></pre></td>
+                <td><pre><code class="js">
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var Animal = /** @class */ (function () {
+    function Animal(family, genus, species) {
+        this.family = family;
+        this.genus = genus;
+        this.species = species;
+        this.taxonomy = family + " " + genus + " " + species;
+    }
+    return Animal;
+}());
+var bob = new Animal("Hominidae", "Homo", "Sapien");
+//Inheritance!!!
+var Dog = /** @class */ (function (_super) {
+    __extends(Dog, _super);
+    function Dog(name) {
+        var _this = _super.call(this, "Canidae", "Canis", "Lupus") || this;
+        _this.name = name;
+        return _this;
+    }
+    Dog.prototype.bark = function () {
+        console.log(this.name + " just barked you!");
+    };
+    return Dog;
+}(Animal));
+var greatDane = new Dog("Scooby Doo");
+greatDane.bark();
+                </code></pre></td>
+            </tr>
+        </table>
+        
 	</div>
     <a id="scrolltop" href="#top">top</a>
 	<script type="text/javascript" src="highlight/highlight.pack.js"></script>
