@@ -7,7 +7,8 @@
         .slide:nth-child(1) {background-color: #C9F1FF;}
         .slide:nth-child(2) {background-color: #BBFFD0;}
         .slide:nth-child(4) {background-color: #FFD3DF;}
-		.slide:nth-child(5) {background-color: #FFDFCE;}
+        .slide:nth-child(5) {background-color: #FFDFCE;}
+        .slide:nth-child(6) {background-color: #C9F1FF;}
 		.centered {
 			text-align: center;;
 		}
@@ -55,6 +56,13 @@
             color: black;
         }
         a.button:hover {color: white;}
+        #terminal {
+            margin-left: 2in;
+            margin-right: 2in;
+            font-family: "consolas", monospace;
+            background-color: #C8957E;
+            color: white;
+        }
 	</style>
 	<link rel="stylesheet" href="highlight/styles/solarized-light.css" />
 </head>
@@ -91,6 +99,16 @@
 			</ol>
 		</p>
 	</div>
+    <div class="slide">
+        <h2>How would I ever use this?</h2>
+        <p>First, install the compiler. Next, write your TS program. Then, save it in a file with the extension ".ts" and find it in your terminal. Finally, compile it and a javascript file with the same name as your original file (sans extension) will be generated. Attach this as a script to your html document.</p>
+        <p id="terminal">
+            $ npm install -g typescript<br>
+            $ emacs script.ts<br>
+            $ tsc script.ts
+        </p>
+        <br>
+    </div>
 	<div class="slide">
 		<h2>Summary</h2>
 		<p>TypeScript is cool. You can play with it here <a href="https://www.typescriptlang.org/play/index.html">https://www.typescriptlang.org/play/index.html</a>. If you ever find yourself writing large-scale JavaScript applications, it's a super useful tool to have because it can save you a lot of time deciphering vague "Type Error"s. It also allows you to use features in javascript that most browsers don't support.</p>
