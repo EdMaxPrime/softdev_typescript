@@ -350,7 +350,7 @@ console.log(book_info(harryPotter));
 	</div>
 	<div id="ex13" class="slide">
 		<h3>Classes</h3>
-        <p>EXPLAIN</p>
+        <p>Although JavaScript is an object-oriented language, it does not support classes. TypeScript fills this gap. It has classes, inheritance, public/private/protected fields, static variables, and readonly properties. The basic structure of classes and an example of inheritance is shown below. Classes may only have one constructor, and it is the function named <b>constructor</b>. All instance variables are public by default. To change this, prepend the keywords <b>private</b> or <b>protected</b> to the declaration. Read-only variables can't be modified from outside the class. To make one, prepend the keyword <b>readonly</b> to the declaration.</p>
         <table class="compare">
             <tr><th>TypeScript</th><th>JavaScript</th></tr>
             <tr>
@@ -417,6 +417,7 @@ greatDane.bark();
                 </code></pre></td>
             </tr>
         </table>
+        <p>You may notice that the Animal constructor had the word "public" in front of the names of its parameters. This is TypeScript shorthand. It will take those parameters and make them instance variables automatically, giving them the value from the constructor.</p>
         
 	</div>
     <a id="scrolltop" href="#top">top</a>
