@@ -63,6 +63,7 @@
             background-color: #C8957E;
             color: white;
         }
+        .good {color: #cfc;}
 	</style>
 	<link rel="stylesheet" href="highlight/styles/solarized-light.css" />
 </head>
@@ -104,8 +105,11 @@
         <p>First, install the compiler. Next, write your TS program. Then, save it in a file with the extension ".ts" and find it in your terminal. Finally, compile it and a javascript file with the same name as your original file (sans extension) will be generated. Attach this as a script to your html document.</p>
         <p id="terminal">
             $ npm install -g typescript<br>
+            <span class="good">&gt;&gt; Succesfully installed the TS compiler</span><br>
             $ emacs script.ts<br>
-            $ tsc script.ts
+            <span class="good">&gt;&gt; You have edited script.ts</span><br>
+            $ tsc script.ts<br>
+            <span class="good">&gt;&gt; Succesfully compiled script.ts into script.js, no errors</span>
         </p>
         <br>
     </div>
