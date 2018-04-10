@@ -17,9 +17,9 @@
 		}
         #top table {
             table-layout: fixed;
-            width: 100%;
-            margin: auto 1in;
+            margin: auto auto;
         }
+        #top table td {padding: 0px 15px;}
         #top a {
             color: white; 
             text-decoration: none;
@@ -76,12 +76,41 @@
         </table>
     </div>
     <div style="background-color: #C9F1FF; padding: 20px; line-height: 1.5em;">
-        Each of the examples has a code sample below it. Please note that, depending on your internet browser window size, some of those side-by-side code comparisons may turn into side-scrolling adventures. If that's the case, kepp in mind the code isn't cut off, you just need to swipe left to see it.<br>
-	    <div class="centered"><a class="button" href="index.html">read about it</a><a class="button" href="http://typescriptlang.org">documentation</a></div>
+        Click on a topic above to learn more about it. Each of the topics have a code sample to go along with it. Please note that, depending on your internet browser's window size, some of those side-by-side code comparisons may turn into side-scrolling adventures. If that's the case, keep in mind the code isn't cut off, you just need to swipe left to see it. <br> In the lower right corner is a button that will bring you back up to this index. <br> Below are links to the home page, which is about TypeScript as a whole, and to the official documentation.<br>
+	    <div class="centered"><a class="button" href="index.html">general info</a><a class="button" href="http://typescriptlang.org">documentation</a></div>
     </div>
     <div id="ex0" class="slide">
 		<h2>Var vs. Let</h2>
-		<p style="padding-top: 5px; padding-bottom: 5px;">In TypeScript the keyword <b>let</b> is used in preference to JavaScript's <b>var</b> because it confines variables to the scope/block they were defined in, and doesn't let you redefine the same variable.</p>
+		<p style="padding-top: 5px; padding-bottom: 5px;">In TypeScript the keyword <b>let</b> is used in preference to JavaScript's <b>var</b> because it confines variables to the scope/block they were defined in, and it doesn't let you redeclare a variable twice.</p>
+        <table class="compare">
+            <tr><th>Redeclaring</th><th>Not Scoped</th></tr>
+            <tr>
+                <td><pre><code class="js">
+var zoinks = function(scary) {
+    var message = "yikes"
+    if(scary == true) {
+        var message = "jinkies";
+    }
+    console.log(message);
+}
+zoinks(false); //prints "yikes"
+zoinks(true);  //prints "jinkies"
+                </code></pre></td>
+                <td><pre><code class="js">
+var count = function() {
+    for(var i = 0; i < 10; i++) {
+        setTimeout(function() {
+            console.log(i);
+        }, 1000);
+    }
+}
+count(); //prints "10" ten times
+
+                </code></pre></td>
+            </tr>
+        </table>
+        <p>In the first example (left), the issue with redeclaring variables becomes apparent. The code is valid JavaScript and will print "yikes" or "zoinks" depending on the value of the parameter. However, the variable message is declared twice <i>and</i> it's in a nested block (inside the if statement). This is weird because it blurs the line between declaring/initializing, and it undermines the concept of nesting scopes in JS. A Scooby Doo catchphrase would be apt here. But fear not. With the <b>let</b> keyword, you would get an error for both of those violations.</p>
+        <p>In the second example (right), the count function tries to print the numbers 0-9 with one second intervals. Surprisingly, that is not what this code does. This is because the variable i isn't captured at the moment the loop is executed, but rather when the timeout function is run. So the for loop will increment i to 10 by the time the timeout happens. Understandably, this can be frustrating. The <b>let</b> keyword would work better in place of <b>var</b> here because it will capture i while the loop is happening, allowing you to print 0-9.</p>
 	</div>
     <div id="ex1" class="slide">
         <h2>Rest Parameters</h2>
